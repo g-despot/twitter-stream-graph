@@ -69,11 +69,14 @@ def process_referenced_tweets(referenced_tweets, original_tweet_id):
             "user_id": user.id,
             "user_username": user.username,
             "tweet_id": tweet.id,
-            "tweet": tweet.text,
+            "tweet_text": tweet.text,
             "type": referenced_tweet.type,
             "original_tweet_id": original_tweet_id,
         }
         print(f"Message: {message}")
+
+        producer.send(KAFKA_TOPIC, json.dumps(message).encode("utf8"))
+        producer.flush()
 
 
 def process_tweet(tweet):
@@ -82,7 +85,9 @@ def process_tweet(tweet):
         "user_id": user.id,
         "user_username": user.username,
         "tweet_id": tweet.id,
-        "tweet": tweet.text,
+        "tweet_text": tweet.text,
+        "type": "ORIGINAL",
+        "original_tweet_id": "ORIGINAL",
     }
     print(f"Message: {message}")
 
