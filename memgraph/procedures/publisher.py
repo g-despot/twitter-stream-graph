@@ -16,9 +16,7 @@ def create(created_objects: mgp.Any) -> mgp.Record():
             created_object = {
                 "id": obj["vertex"].id,
                 "labels": [label.name for label in obj["vertex"].labels],
-                "username": obj["vertex"].properties["username"],
                 "rank": obj["vertex"].properties["rank"],
-                "cluster": obj["vertex"].properties["cluster"],
             }
             created_objects_info["vertices"].append(created_object)
         else:
@@ -46,28 +44,7 @@ def update_rank(node: mgp.Vertex, rank: float) -> mgp.Record():
     updated_object = {
         "id": node.id,
         "labels": [label.name for label in node.labels],
-        "username": node.properties["username"],
         "rank": rank,
-    }
-    updated_objects_info["vertices"].append(updated_object)
-
-    kafka_producer = KafkaProducer(bootstrap_servers=KAFKA_IP + ":" + KAFKA_PORT)
-    kafka_producer.send(
-        "created_objects", json.dumps(updated_objects_info).encode("utf8")
-    )
-
-    return mgp.Record()
-
-
-@mgp.read_proc
-def update_cluster(node: mgp.Vertex, community_id: int) -> mgp.Record():
-    updated_objects_info = {"vertices": [], "edges": []}
-
-    updated_object = {
-        "id": node.id,
-        "labels": [label.name for label in node.labels],
-        "username": node.properties["username"],
-        "cluster": community_id,
     }
     updated_objects_info["vertices"].append(updated_object)
 

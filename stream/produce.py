@@ -10,7 +10,7 @@ import tweepy
 BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAL6WbAEAAAAAk6l%2FJs5FHIaruNNZAsypC5DGZSQ%3DqKoDmp7lf24GmSNMJchzKsVSgZrrRRIgd8t71UirM32Z8PbyHI"
 KAFKA_IP = os.getenv("KAFKA_IP", "localhost")
 KAFKA_PORT = os.getenv("KAFKA_PORT", "9093")
-KAFKA_TOPIC = os.getenv("KAFKA_TOPIC", "tweets")
+KAFKA_TOPIC = os.getenv("KAFKA_TOPIC", "twitter")
 
 args = None
 producer = None
@@ -153,7 +153,7 @@ def main():
 
     global twitter_client, twitter_stream
     twitter_client = tweepy.Client(bearer_token=BEARER_TOKEN)
-    twitter_stream = MyStreamListener(1)
+    twitter_stream = MyStreamListener(3)
 
     hashtags = ["#Ukraine"]
     print(f"Watch for hashtags: {hashtags}")
