@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  background-image: url("https://assets.website-files.com/6141c89a3874c3702674a1c0/615afd9a0e9a9d80a158f41b_601411ab85e0d9cae62db6e7_memgraph_1-3_release.png");
+}

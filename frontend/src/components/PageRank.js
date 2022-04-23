@@ -317,7 +317,7 @@ export default class PageRank extends React.Component {
 
     render() {
         return (<div className="PageRankDiv">
-            <h2>Number of users that retweeted so far: {this.state.nodes.length}</h2>
+            <h2>Number of users and tweets so far: {this.state.nodes.length}</h2>
             <h1>PageRank</h1>
             <svg className="PageRankSvg" ref={this.myReference}
                 style={{
